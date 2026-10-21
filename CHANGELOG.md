@@ -1,5 +1,8 @@
 # 更新记录
 
+小笺从 [oocreater/MyQuoteCard](https://github.com/oocreater/MyQuoteCard)（自言卡）改进而来。
+下面 0.6.1 那一节是原项目的首个公开预览版，之后的版本是本仓库的改动。
+
 ## 0.9.12 — 2026-10-19
 
 这一版是代码复查的结果，两处都是「边界情况没守住」，不是新功能。
@@ -135,7 +138,7 @@
 
 ## 0.6.1 — 2026-07-03
 
-首个公开预览版。
+上游项目（[oocreater/MyQuoteCard](https://github.com/oocreater/MyQuoteCard)）的首个公开预览版。
 
 - 每日随机显示一条用户自定义内容
 - 白底黑字默认主题，不显示日期或星期

@@ -8,6 +8,8 @@
 
 小笺是一张轻量的 Windows 桌面文字卡片。内容完全由你决定：写下句子、提醒、摘录或一小段话，软件每天随机显示一条。
 
+它从 [oocreater/MyQuoteCard](https://github.com/oocreater/MyQuoteCard)（自言卡）改进而来，界面与功能都做了大量改动 —— 详见[来源](#来源)。
+
 默认外观是白底黑字，不显示日期或星期。你也可以自由调整颜色、字体、背景图片、透明背景、卡片大小和排版对齐方式。
 
 ## 截图
@@ -102,6 +104,24 @@ sh tools/verify_all.sh
 
 细节见 [tools/README.md](tools/README.md)。每一项改动的设计取舍记在 [docs/notes/](docs/notes/)。
 
+## 来源
+
+小笺不是从零写的。它从 [oocreater/MyQuoteCard](https://github.com/oocreater/MyQuoteCard)（自言卡，0.6.1）改来：
+卡片的样子、右键菜单的骨架、每天随机取一条内容、托盘图标与 `Ctrl + Alt + Q` 找回卡片，这些都是原项目就有的。
+
+在原项目之上主要做了这些：
+
+- 每张卡片各有一份内容库（原来只有一份）
+- 便携式数据目录：数据在程序旁边的 `data` 里，把文件夹整个拷走就带走了全部内容（原来固定在 `%LOCALAPPDATA%\MyQuoteCard`；这个目录名至今保留，只为读旧数据）
+- 卡片尺寸自由：从「文字区正好装下文字」到铺满桌面，拖动边缘或四角都能改
+- 字号、行距、字距、字体预设、文字描边、两端对齐与禁则处理
+- 多卡片；竖排（传统竖排，从右往左）
+- 拖动吸附：贴近另一张卡片或桌面边缘时自动对齐
+- 鼠标穿透、背景图片、圆角边框、卡片层级
+- 状态与内容库改成原子写（先写 `.tmp` 再换名）：写到一半崩溃、磁盘满或断电，都不会留下截断的文件
+
+原项目采用 MIT 许可证，本仓库同样；[LICENSE](LICENSE) 里保留了原项目的版权声明。
+
 ## 反馈
 
 欢迎在 [Issues](../../issues) 报告问题或提出建议。请勿在截图或日志中公开自己的私人内容库。
@@ -113,6 +133,8 @@ sh tools/verify_all.sh
 ## English
 
 XiaoJian is a lightweight Windows desktop card for words chosen entirely by you. Add quotes, reminders, excerpts, or short passages; the app displays one random entry each day.
+
+XiaoJian is derived from [oocreater/MyQuoteCard](https://github.com/oocreater/MyQuoteCard) (MIT licensed). The card itself, the context menu skeleton, the daily random pick, and the tray icon are its work; per-card libraries, the portable data folder, free sizing, the typography controls, vertical text, drag snapping, and atomic writes were added here.
 
 The default appearance is black text on a white card, with no date or weekday. Colors, fonts, background images, transparency, size, and window layer are customizable.
 
