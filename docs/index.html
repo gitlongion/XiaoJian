@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小笺 · XiaoJian｜把你自己的话，放在你自己的桌面上</title>
+  <meta name="description" content="小笺是一张 Windows 桌面文字卡片。每天随机显示一条你自己写下的内容，支持自定义颜色、字体、背景图片、透明背景和开机自启动。">
+  <meta name="keywords" content="小笺, XiaoJian, Windows桌面卡片, 每日一句, 桌面小组件, 自定义文字, quotes, desktop widget">
+  <meta property="og:title" content="小笺 · XiaoJian">
+  <meta property="og:description" content="把你自己的话，放在你自己的桌面上。">
+  <meta property="og:image" content="cover.png">
+  <style>
+    :root {
+      --bg: #f6f2ea;
+      --card: #fffdf8;
+      --ink: #1f1f1f;
+      --muted: #6f685f;
+      --line: #e8ded0;
+      --accent: #111111;
+      --accent-soft: #efe4d4;
+      --shadow: 0 18px 50px rgba(45, 33, 20, .12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.85), transparent 34rem),
+        linear-gradient(135deg, #fffaf3 0%, var(--bg) 55%, #f1e6d7 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .wrap {
+      width: min(1080px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 72px 0 44px;
+      display: grid;
+      grid-template-columns: 1fr 1.08fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.62);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    h1 {
+      margin: 20px 0 16px;
+      font-size: clamp(40px, 7vw, 76px);
+      letter-spacing: -0.06em;
+      line-height: 1.05;
+    }
+
+    .lead {
+      margin: 0 0 26px;
+      color: #3f3932;
+      font-size: clamp(18px, 2.2vw, 23px);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 28px 0 18px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,.6);
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero-shot {
+      position: relative;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 28px;
+      background: rgba(255,255,255,.42);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-shot img,
+    .shot img {
+      display: block;
+      width: 100%;
+      border-radius: 18px;
+    }
+
+    .section {
+      padding: 42px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .feature,
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255,253,248,.78);
+      box-shadow: 0 10px 28px rgba(45, 33, 20, .07);
+    }
+
+    .feature {
+      padding: 22px;
+    }
+
+    .feature h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .feature p,
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .panel {
+      padding: 26px;
+    }
+
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: -0.04em;
+      line-height: 1.18;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.2em;
+      color: #3f3932;
+    }
+
+    .shots {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .shot {
+      padding: 12px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,253,248,.72);
+    }
+
+    .footer {
+      padding: 42px 0 58px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 820px) {
+      .hero,
+      .two,
+      .shots,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 44px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Windows 桌面卡片 · 本地离线 · 自定义文字</div>
+        <h1>小笺</h1>
+        <p class="lead">把你自己的话，放在你自己的桌面上。</p>
+        <p>它不是待办，也不是日历。它只做一件小事：每天从你写下的内容里随机显示一条，像一张安静的小纸条。</p>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/oocreater/MyQuoteCard/releases/latest">下载 Windows 版</a>
+          <a class="button secondary" href="https://github.com/oocreater/MyQuoteCard">查看 GitHub</a>
+        </div>
+        <p class="note">目前是 Windows 版。手机版还在想，如果你也想要，可以先留言告诉我。</p>
+      </div>
+      <div class="hero-shot">
+        <img src="cover.png" alt="小笺桌面卡片与右键菜单预览">
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid">
+        <div class="feature">
+          <h3>内容由你决定</h3>
+          <p>句子、提醒、摘录、小段文字都可以。每一行就是一条内容。</p>
+        </div>
+        <div class="feature">
+          <h3>每天随机一条</h3>
+          <p>每天换一句，不显示日期和星期几，不抢你的注意力。</p>
+        </div>
+        <div class="feature">
+          <h3>本地保存</h3>
+          <p>不联网，不收集数据。内容库只保存在你的电脑里。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section two">
+      <div class="panel">
+        <h2>它可以很简单，也可以变成你的样子。</h2>
+        <ul>
+          <li>自定义背景颜色、文字颜色和字体</li>
+          <li>支持背景图片和透明背景</li>
+          <li>可以拖动位置，也可以拉动边缘调整大小</li>
+          <li>文字可以自动适应卡片</li>
+          <li>可选开机自启动</li>
+          <li>找不到卡片时，可用 Ctrl + Alt + Q 找回</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>适合放什么？</h2>
+        <p>一句想记住的话，一段写给自己的提醒，一条读书摘录，一个短短的目标，或者任何只想偶尔看见的东西。</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>截图</h2>
+      <div class="shots">
+        <div class="shot">
+          <img src="edit-library.png" alt="小笺编辑内容库界面">
+        </div>
+        <div class="shot">
+          <img src="transparent.png" alt="小笺透明背景效果">
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel">
+        <h2>下载</h2>
+        <p>下载最新的 <strong>XiaoJian.exe</strong> 后直接运行即可。当前版本还没有代码签名，Windows 可能会出现安全提醒，请确认文件来自本项目发布页。</p>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/oocreater/MyQuoteCard/releases/latest">去下载最新版本</a>
+          <a class="button secondary" href="https://github.com/oocreater/MyQuoteCard/blob/main/PRIVACY.md">查看隐私说明</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    小笺 · XiaoJian © oocreater
+  </footer>
+</body>
+</html>

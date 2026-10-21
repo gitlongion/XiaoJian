@@ -1,0 +1,18 @@
+# 构建产物
+dist/
+obj/
+bin/
+
+# 验证工程里由脚本生成的部分（Extracted.cs 必须每次从 src/ 重新抽取）
+tools/harness/Extracted.cs
+
+# 运行时数据：程序会在自己旁边生成 data 文件夹
+data/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+*.user
+*.suo
+.vs/
+*.tmp

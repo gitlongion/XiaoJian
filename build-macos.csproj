@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- 在 macOS / Linux 上交叉编译出与 build.bat 等价的 Windows 可执行文件。
+       用法：把本文件放到仓库根目录（与 build.bat 同级），然后执行
+           dotnet build build-macos.csproj -c Release
+       产物：dist/Release/XiaoJian.exe
+       依赖：Microsoft.NETFramework.ReferenceAssemblies（提供 .NET Framework 4.0 参考程序集） -->
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net40</TargetFramework>
+    <AssemblyName>XiaoJian</AssemblyName>
+    <RootNamespace>XiaoJian</RootNamespace>
+
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+
+    <ApplicationManifest>src/XiaoJian/app.manifest</ApplicationManifest>
+    <ApplicationIcon>src/XiaoJian/card.ico</ApplicationIcon>
+
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>false</GenerateBindingRedirectsOutputType>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <BaseOutputPath>dist/</BaseOutputPath>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <NoWarn>$(NoWarn);CS0618;CS1591;CS0436</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="src/XiaoJian/Program.cs" />
+    <Compile Include="src/XiaoJian/Storage.cs" />
+    <Compile Include="src/XiaoJian/Forms.cs" />
+    <Compile Include="src/XiaoJian/AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>
