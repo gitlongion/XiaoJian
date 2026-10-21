@@ -90,7 +90,7 @@ def _find_ico():
     for cand in (os.path.join(here, "card.ico"),
                  os.path.join(here, "src", "XiaoJian", "card.ico"),
                  os.path.join(here, "..", "src", "XiaoJian", "card.ico"),
-                 "/tmp/XiaoJian/src/XiaoJian/card.ico"):
+                 os.path.join(here, "..", "src", "XiaoJian", "card.ico")):
         if os.path.isfile(cand):
             return os.path.normpath(cand)
     return None

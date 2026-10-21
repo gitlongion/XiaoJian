@@ -26,8 +26,9 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 _DEFAULT_SRC = os.path.join(_HERE, "src", "XiaoJian")
 if not os.path.isdir(_DEFAULT_SRC):
     # 交付目录里三个 .cs 就摆在脚本旁边
+    # 交付目录里几个 .cs 就摆在脚本旁边；仓库布局里脚本在 tools/，源码在上两级。
     _DEFAULT_SRC = _HERE if os.path.isfile(os.path.join(_HERE, "Forms.cs")) \
-        else "/tmp/XiaoJian/src/XiaoJian"
+        else os.path.normpath(os.path.join(_HERE, "..", "src", "XiaoJian"))
 
 SRC = _DEFAULT_SRC
 for _i, _a in enumerate(sys.argv):

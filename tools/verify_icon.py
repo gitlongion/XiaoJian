@@ -41,7 +41,7 @@ def _default_ico():
     here = os.path.dirname(os.path.abspath(__file__))
     for cand in (os.path.join(here, "card.ico"),
                  os.path.join(here, "src", "XiaoJian", "card.ico"),
-                 "/tmp/XiaoJian/src/XiaoJian/card.ico"):
+                 os.path.join(here, "..", "src", "XiaoJian", "card.ico")):
         if os.path.isfile(cand):
             return cand
     return os.path.join(here, "card.ico")

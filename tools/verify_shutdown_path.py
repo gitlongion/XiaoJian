@@ -21,7 +21,8 @@ import sys
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _DEFAULT_SRC = os.path.join(_HERE, "src", "XiaoJian")
 if not os.path.isdir(_DEFAULT_SRC):
-    _DEFAULT_SRC = "/tmp/XiaoJian/src/XiaoJian"
+    # 仓库布局：脚本在 tools/，源码在上两级的 src/XiaoJian。
+    _DEFAULT_SRC = os.path.normpath(os.path.join(_HERE, "..", "src", "XiaoJian"))
 
 SRC = _DEFAULT_SRC
 for _i, _a in enumerate(sys.argv):
