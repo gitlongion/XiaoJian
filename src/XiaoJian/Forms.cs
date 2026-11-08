@@ -880,8 +880,8 @@ namespace XiaoJian
             helpItem.Click += delegate
             {
                 MessageBox.Show(T(
-                    "• 拖动卡片，可以改变位置\n• 拖动卡片的边缘或四角，可以把卡片调成任意大小；最小不会小于文字所占的区域，文字四周只留 12 像素内边距\n• “卡片大小 → 适应文字大小（最小）”让卡片恰好包住文字，不留多余背景\n• 卡片小到放不下右下角的“⋯”按钮时，按钮会自动隐藏；此时右键卡片任意位置，仍可打开全部菜单\n• 双击文字，编辑这张卡片自己的内容库；每张卡片各有一份，互不影响\n• “切换到另一条内容”会立即更换当前显示\n• “卡片设置”管理大小、背景和卡片层级\n• “置顶”让卡片盖在其他窗口上；“置底”允许其他窗口盖住卡片\n• “文字设置”管理字号、颜色、字体和排版对齐\n• “大一点 / 小一点 / 设为最小 / 恢复默认字号”会由你决定字号，并自动取消“文字自动适应卡片”；想交还给卡片，重新勾上它即可\n• 找不到卡片时，按 Ctrl+Alt+Q、双击右下角小图标，或再次打开软件\n• 寻找时，卡片会移到屏幕中央并以醒目颜色显示几秒\n• 勾选“开机自启动”表示已经在系统的“启动”文件夹里放好了启动方式，随时可以删掉\n• 透明背景模式下，文字区域仍可右键、拖动和调整大小\n• 透明背景模式下，卡片空白处不会挡住下层窗口的点击\n• 勾选“鼠标穿透”后，卡片仍显示在最上层，但鼠标点击会穿透到下层窗口\n• 鼠标穿透开启时，卡片不再响应鼠标；请在托盘图标的右键菜单里取消勾选，或按 Ctrl+Alt+Q 让卡片临时可点击\n• “新建一张卡片”可以再放一张卡片，每张卡片的位置、外观和内容都互相独立\n• “卡片列表”里可以显示、隐藏或定位每一张卡片\n• “竖排文字”让文字自上而下、由右向左排列，符合中文竖排习惯\n• “排版对齐”可选左对齐 / 水平居中 / 右对齐，以及顶部对齐 / 垂直居中 / 底部对齐；横排与竖排都适用\n• “内容来源”可选“跟随每日轮换”或“固定显示某一句”，每张卡片各自设置\n• 免安装、便携：设置、内容库和背景图片都放在程序旁边的 data 文件夹里，把整个文件夹拷走就带走了全部内容\n• 只有当程序所在位置不可写（例如只读盘或需要管理员权限的目录）时，才会改用用户目录存放",
-                    "• Drag the card to move it\n• Drag any edge or corner to size the card however you like; it never goes smaller than its text, which keeps 12 pixels of padding on every side\n• “Card size → Fit to text (smallest)” makes the card exactly wrap its text, with no spare background\n• On a card too small for the “...” button, the button hides; right-click anywhere on the card for the full menu\n• Double-click the text to edit this card's own library; every card has its own and they never mix\n• “Switch to another entry” changes the current text immediately\n• “Card settings” controls size, background, and card layer\n• “Top” keeps the card above other windows; “Bottom” lets other windows cover it\n• “Text settings” controls size, color, font and text alignment\n• “Larger / Smaller / Smallest / Reset text size” hand the size to you and turn “Fit text to card automatically” off; tick it again to hand the size back\n• If the card is lost, press Ctrl+Alt+Q, double-click the tray icon, or open the app again\n• The card moves to the center and uses a bright highlight for a few seconds\n• A check beside “Start with Windows” means a launcher is in place in your Startup folder, where you can remove it\n• In transparent mode, the text area can still be right-clicked, dragged, and resized\n• In transparent mode, the empty part of the card lets clicks reach the window below\n• With “Mouse pass-through” on, the card stays on top but clicks reach the window below\n• While pass-through is on the card ignores the mouse; uncheck it from the tray icon menu, or press Ctrl+Alt+Q to make the card clickable again\n• “New card” adds another card; every card keeps its own position, look and content\n• The “Cards” list shows, hides or finds each card\n• “Vertical text” runs characters top to bottom in columns that read right to left\n• “Text alignment” picks left / centre / right and top / middle / bottom; it applies to horizontal and vertical text alike\n• “Content source” picks the daily rotation or one pinned sentence, per card\n• No installation, no registry: settings, libraries and background images sit in a “data” folder beside the program, so copying that folder takes everything with it\n• Only a location the program cannot write to falls back to your user folder"),
+                    "• 拖动卡片，可以改变位置\n• 拖动卡片的边缘或四角，可以把卡片调成任意大小；最小不会小于文字所占的区域，文字四周只留 12 像素内边距\n• “卡片大小 → 适应文字大小（最小）”让卡片恰好包住文字，不留多余背景\n• 卡片小到放不下右下角的“⋯”按钮时，按钮会自动隐藏；此时右键卡片任意位置，仍可打开全部菜单\n• 双击文字，编辑这张卡片自己的内容库；每张卡片各有一份，互不影响\n• “切换到另一条内容”会立即更换当前显示\n• “卡片设置”管理大小、背景和卡片层级\n• “置顶”让卡片盖在其他窗口上；“置底”允许其他窗口盖住卡片\n• “文字设置”管理字号、颜色、字体和排版对齐\n• “大一点 / 小一点 / 设为最小 / 恢复默认字号”会由你决定字号，并自动取消“文字自动适应卡片”；想交还给卡片，重新勾上它即可\n• 找不到卡片时，按 Ctrl+Alt+Q、双击右下角小图标，或再次打开软件\n• 寻找时，卡片会移到屏幕中央并以醒目颜色显示几秒\n• 勾选“开机自启动”表示已经在系统的“启动”文件夹里放好了启动方式，随时可以删掉\n• 透明背景模式下，文字区域仍可右键、拖动和调整大小\n• 透明背景模式下，卡片空白处不会挡住下层窗口的点击\n• 勾选“鼠标穿透”后，卡片仍显示在最上层，但鼠标点击会穿透到下层窗口\n• 鼠标穿透开启时，卡片不再响应鼠标；请在托盘图标 →「卡片列表」→ 对应卡片里选「关闭鼠标穿透」，或选「寻找这张卡片」让它临时可点击\n• “新建一张卡片”可以再放一张卡片，每张卡片的位置、外观和内容都互相独立\n• “卡片列表”里可以显示、隐藏、寻找每一张卡片，也可以单独关掉某张卡片的鼠标穿透\n• “竖排文字”让文字自上而下、由右向左排列，符合中文竖排习惯\n• “排版对齐”可选左对齐 / 水平居中 / 右对齐，以及顶部对齐 / 垂直居中 / 底部对齐；横排与竖排都适用\n• “内容来源”可选“跟随每日轮换”或“固定显示某一句”，每张卡片各自设置\n• 免安装、便携：设置、内容库和背景图片都放在程序旁边的 data 文件夹里，把整个文件夹拷走就带走了全部内容\n• 只有当程序所在位置不可写（例如只读盘或需要管理员权限的目录）时，才会改用用户目录存放",
+                    "• Drag the card to move it\n• Drag any edge or corner to size the card however you like; it never goes smaller than its text, which keeps 12 pixels of padding on every side\n• “Card size → Fit to text (smallest)” makes the card exactly wrap its text, with no spare background\n• On a card too small for the “...” button, the button hides; right-click anywhere on the card for the full menu\n• Double-click the text to edit this card's own library; every card has its own and they never mix\n• “Switch to another entry” changes the current text immediately\n• “Card settings” controls size, background, and card layer\n• “Top” keeps the card above other windows; “Bottom” lets other windows cover it\n• “Text settings” controls size, color, font and text alignment\n• “Larger / Smaller / Smallest / Reset text size” hand the size to you and turn “Fit text to card automatically” off; tick it again to hand the size back\n• If the card is lost, press Ctrl+Alt+Q, double-click the tray icon, or open the app again\n• The card moves to the center and uses a bright highlight for a few seconds\n• A check beside “Start with Windows” means a launcher is in place in your Startup folder, where you can remove it\n• In transparent mode, the text area can still be right-clicked, dragged, and resized\n• In transparent mode, the empty part of the card lets clicks reach the window below\n• With “Mouse pass-through” on, the card stays on top but clicks reach the window below\n• While pass-through is on the card ignores the mouse; use Tray → Cards → that card → Turn off pass-through, or Find this card to make it clickable for six seconds\n• “New card” adds another card; every card keeps its own position, look and content\n• The “Cards” list shows, hides or finds each card, and can turn off pass-through for one card\n• “Vertical text” runs characters top to bottom in columns that read right to left\n• “Text alignment” picks left / centre / right and top / middle / bottom; it applies to horizontal and vertical text alike\n• “Content source” picks the daily rotation or one pinned sentence, per card\n• No installation, no registry: settings, libraries and background images sit in a “data” folder beside the program, so copying that folder takes everything with it\n• Only a location the program cannot write to falls back to your user folder"),
                     T("小笺 · 使用方法", "XiaoJian · Help"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             };
             menu.Items.Add(helpItem);
@@ -1725,7 +1725,8 @@ namespace XiaoJian
         }
 
         // Rebuilds the card entries. The items carry no stable name, so ApplyMenuLanguage leaves
-        // their text alone and the list is rebuilt on every open, which keeps it current.
+        // their text alone and the list is rebuilt on every open, which keeps it current - and
+        // keeps the language of the per-card actions in sync with a language switch.
         internal void RefreshCardList()
         {
             if (_cardListMenu == null || Manager == null) return;
@@ -1746,7 +1747,17 @@ namespace XiaoJian
                 item.Text = Manager.DescribeCard(index, target);
                 item.Checked = target.Visible;
                 QuoteCardForm selected = target;
-                item.Click += delegate
+
+                // A card with pass-through on receives no mouse input at all, so its own menu
+                // cannot be opened. Only the first card owns the tray icon, and that tray menu is
+                // built from the first card's state - so for every card after the first, this list
+                // is the only menu in the process that can still reach it. Everything needed to
+                // get such a card back therefore lives on its entry here.
+                ToolStripMenuItem toggle = new ToolStripMenuItem();
+                toggle.Text = T(selected.Visible ? "隐藏这张卡片" : "显示这张卡片",
+                                selected.Visible ? "Hide this card" : "Show this card");
+                toggle.Checked = selected.Visible;
+                toggle.Click += delegate
                 {
                     // Hiding a card from inside this menu can leave the drop-down without an
                     // owner window, so the toggle also waits for the click message to finish.
@@ -1755,6 +1766,35 @@ namespace XiaoJian
                         if (selected != null && !selected.IsDisposed) selected.ToggleCardVisible();
                     });
                 };
+                item.DropDownItems.Add(toggle);
+
+                ToolStripMenuItem find = new ToolStripMenuItem();
+                find.Text = T("寻找这张卡片（临时可点击）", "Find this card (temporarily clickable)");
+                find.Click += delegate
+                {
+                    RunAfterMenu(delegate
+                    {
+                        if (selected != null && !selected.IsDisposed) selected.LocateCard();
+                    });
+                };
+                item.DropDownItems.Add(find);
+
+                // The locate highlight lasts six seconds - not long enough to pick a colour from a
+                // dialog. A one-step way back that actually changes the setting is essential.
+                if (selected.Card.ClickThrough)
+                {
+                    ToolStripMenuItem unlock = new ToolStripMenuItem();
+                    unlock.Text = T("关闭鼠标穿透（恢复可操作）",
+                                    "Turn off pass-through (make it usable again)");
+                    unlock.Click += delegate
+                    {
+                        RunAfterMenu(delegate
+                        {
+                            if (selected != null && !selected.IsDisposed) selected.DisableClickThrough();
+                        });
+                    };
+                    item.DropDownItems.Add(unlock);
+                }
                 _cardListMenu.DropDownItems.Add(item);
             }
         }
@@ -1767,6 +1807,18 @@ namespace XiaoJian
             _app.Save();
             UpdateTransparentHitBox();
             if (Manager != null) Manager.UpdateTrayTooltip();
+        }
+
+        // The one way back for a card that cannot be clicked. Called from the tray's card list,
+        // which belongs to the first card but can reach every card in the process. Changing the
+        // style alone is not enough: the setting must be saved, or the next start locks it again.
+        internal void DisableClickThrough()
+        {
+            if (!_card.ClickThrough) return;
+            _card.ClickThrough = false;
+            ApplyClickThroughState();
+            _app.Save();
+            if (Manager != null) Manager.RefreshAllMenus();
         }
 
         // Handing the tray icon over keeps the one icon per application, whichever card survives.

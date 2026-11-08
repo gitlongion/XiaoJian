@@ -1803,6 +1803,19 @@ namespace XiaoJian
                     form.ApplyClickThroughState();
                     if (form.ClickThroughStyleActive) return 32;
                     if (!form.TransparentHitBoxActive) return 33;
+
+                    // A card that ignores the mouse cannot turn pass-through off from its own menu.
+                    // The tray's card list is the only reachable entry point, and it has to write
+                    // the setting back too - otherwise the next start locks the card again.
+                    reloadedCard.ClickThrough = true;
+                    form.ApplyClickThroughState();
+                    if (!form.ClickThroughStyleActive) return 268;
+                    form.DisableClickThrough();
+                    if (reloadedCard.ClickThrough) return 269;
+                    if (form.ClickThroughStyleActive) return 270;
+                    if (!form.TransparentHitBoxActive) return 271;
+                    AppState unlocked = AppState.Load(statePath);
+                    if (unlocked.Cards.Count != 1 || unlocked.Cards[0].ClickThrough) return 272;
                     System.Drawing.Size horizontal = form.QuoteBlockSize;
                     if (horizontal.Width <= 0 || horizontal.Height <= 0) return 59;
                     form.SetVerticalText(true);

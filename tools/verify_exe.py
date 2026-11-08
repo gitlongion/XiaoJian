@@ -165,7 +165,7 @@ name = row.Name
 print("  程序集名: %s" % name)
 print("  程序集版本: %s" % ver)
 check("程序集名 = XiaoJian", str(name) == "XiaoJian", str(name))
-check("程序集版本 = 0.9.12.0", ver == "0.9.12.0", ver)
+check("程序集版本 = 0.9.13.0", ver == "0.9.13.0", ver)
 
 refs = {}
 for r in dn.net.mdtables.AssemblyRef.rows:
@@ -193,6 +193,34 @@ for expect in ["QuoteCardForm", "TransparentHitBoxForm", "ResizeSupport", "CardS
 # 方法数（粗略确认代码规模）
 print("  TypeDef 数量: %d, MethodDef 数量: %d" % (
     len(dn.net.mdtables.TypeDef.rows), len(dn.net.mdtables.MethodDef.rows)))
+
+print("\n== 6. 版本号四处一致 ==")
+# 升版本要手改 VERSION / AssemblyInfo / app.manifest / README 四个地方。改漏一处既不报编译
+# 错误也不影响运行 —— app.manifest 就一直停在 0.7.0.0 没人发现。这里拿 exe 的真实程序集
+# 版本当基准，顺带也能抓住「源码改了但没重新编译」。
+repo = os.path.dirname(os.path.abspath(path))
+while repo != os.path.dirname(repo) and not os.path.isfile(os.path.join(repo, "VERSION")):
+    repo = os.path.dirname(repo)
+if not os.path.isfile(os.path.join(repo, "src", "XiaoJian", "AssemblyInfo.cs")):
+    print("  （跳过：exe 不在源码仓库里）")
+else:
+    import io as _io
+    def source(name):
+        return _io.open(os.path.join(repo, name), encoding="utf-8").read()
+    version = source("VERSION").strip()
+    expected = version + ".0"
+    check("VERSION 与 exe 的程序集版本一致", expected == ver,
+          "VERSION=%s exe=%s" % (version, ver))
+    assembly = source("src/XiaoJian/AssemblyInfo.cs")
+    check("AssemblyInfo 两处版本都等于 %s" % expected,
+          assembly.count('AssemblyVersion("%s")' % expected) == 1 and
+          assembly.count('AssemblyFileVersion("%s")' % expected) == 1, expected)
+    manifest = source("src/XiaoJian/app.manifest")
+    check("app.manifest 版本等于 %s" % expected,
+          'assemblyIdentity version="%s"' % expected in manifest)
+    readme = source("README.md")
+    check("README 的下载文件名等于 %s" % version,
+          "XiaoJian-%s.exe" % version in readme, "XiaoJian-%s.exe" % version)
 
 print("\n================ 结果 ================")
 if fails:

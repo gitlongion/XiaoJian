@@ -96,7 +96,7 @@ echo "############ 9/11 程序图标 card.ico：多档结构 + 逐档内容 + �
 
 echo
 echo "############ 10/11 PE / 元数据校验（含内嵌图标与 card.ico 逐字节对照） ############"
-"$PY" "$HERE/verify_exe.py" "$REPO/dist/Release/XiaoJian.exe" 2>&1 | tail -3
+"$PY" "$HERE/verify_exe.py" "$REPO/dist/Release/XiaoJian.exe" 2>&1 | tail -8
 
 echo
 echo "############ 11/11 对照构建：旧版本源码必须被断言报出问题 ############"

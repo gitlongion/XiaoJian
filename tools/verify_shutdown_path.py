@@ -339,6 +339,40 @@ def check_forms(src):
         if site not in src:
             problems.append("S8 缺少退出标志设置：%s" % site)
 
+    # --- 9. 穿透卡片必须能从托盘的卡片列表里解锁 ----------------------
+    # 第 2 张及之后的卡片没有托盘图标。穿透开启后它收不到任何鼠标事件，托盘菜单又属于
+    # 第一张卡片 —— 没有卡片列表这条路径，那张卡就再也操作不了了。
+    card_list = safe_body(src, "internal void RefreshCardList()", problems, "RefreshCardList")
+    if card_list is not None:
+        for fragment, label in (
+                ("selected.LocateCard()", "寻找这张卡片"),
+                ("selected.DisableClickThrough()", "关闭鼠标穿透"),
+                ("selected.Card.ClickThrough", "只在穿透开启时给解锁项")):
+            if fragment not in card_list:
+                problems.append("S9 卡片列表缺少「%s」：%s" % (label, fragment))
+        # 三个动作都必须在菜单消息之外执行：RefreshAllMenus 会重建这些菜单项本身。
+        deferred = re.findall(r"RunAfterMenu\(delegate\s*\{(.*?)\}\);", card_list, re.S)
+        joined = "\n".join(deferred)
+        for name in ("selected.ToggleCardVisible()", "selected.LocateCard()",
+                     "selected.DisableClickThrough()"):
+            if name not in joined:
+                problems.append("S9 %s 没有放进 RunAfterMenu" % name)
+
+    unlock = safe_body(src, "internal void DisableClickThrough()", problems, "DisableClickThrough")
+    if unlock is not None:
+        for fragment, what in (
+                ("if (!_card.ClickThrough) return;", "幂等守卫"),
+                ("_card.ClickThrough = false;", "改设置"),
+                ("ApplyClickThroughState();", "摘掉 WS_EX_TRANSPARENT"),
+                ("_app.Save();", "写回 state.ini"),
+                ("Manager.RefreshAllMenus();", "刷新其它卡片的列表")):
+            if fragment not in unlock:
+                problems.append("S9 DisableClickThrough 缺少「%s」：%s" % (what, fragment))
+
+    # 帮助文本不能再把人指向第一张卡片的托盘菜单。
+    if "请在托盘图标的右键菜单里取消勾选" in src:
+        problems.append("S9 帮助文本仍叫人去托盘菜单取消穿透（那是第一张卡片的菜单）")
+
     return problems
 
 
@@ -459,6 +493,29 @@ INJECTIONS = [
      '                Path.Combine(Path.GetTempPath(), "XiaoJian_error.log")',
      'Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "quote-card.log"),\n'
      '                Path.Combine(Path.GetTempPath(), "quote-card.log")', "P4"),
+    # S9：卡片列表是穿透卡片唯一的解锁入口，少一个动作就会重新锁死。
+    ("卡片列表不再提供「寻找这张卡片」",
+     FORMS, "                        if (selected != null && !selected.IsDisposed) selected.LocateCard();",
+     "                        if (selected != null && !selected.IsDisposed) selected.ToggleCardVisible();", "S9"),
+    ("卡片列表不再提供「关闭鼠标穿透」",
+     FORMS, "                            if (selected != null && !selected.IsDisposed) selected.DisableClickThrough();",
+     "", "S9"),
+    ("解锁项无条件显示（去掉守卫）",
+     FORMS, "                if (selected.Card.ClickThrough)", "                if (true)", "S9"),
+    ("寻找动作不再延后",
+     FORMS, "                    RunAfterMenu(delegate\n"
+            "                    {\n"
+            "                        if (selected != null && !selected.IsDisposed) selected.LocateCard();\n"
+            "                    });",
+     "                    if (selected != null && !selected.IsDisposed) selected.LocateCard();", "S9"),
+    ("解锁不写回 state.ini",
+     FORMS, "            _card.ClickThrough = false;\n            ApplyClickThroughState();",
+     "            ApplyClickThroughState();", "S9"),
+    ("解锁不刷新其它卡片的菜单",
+     FORMS, "            if (Manager != null) Manager.RefreshAllMenus();", "", "S9"),
+    ("帮助文本又指回第一张卡片的托盘菜单",
+     FORMS, "请在托盘图标 →「卡片列表」→ 对应卡片里选「关闭鼠标穿透」",
+     "请在托盘图标的右键菜单里取消勾选", "S9"),
     ("兜底日志换成另一个文件名（两处名字不一致）",
      PROGRAM,
      'Path.Combine(Path.GetTempPath(), "XiaoJian_error.log")',
